@@ -1,0 +1,15 @@
+{# src/CvBundle/Resouces/views/Resume/show.html.twig #}
+{% extends 'CvBundle::layout.html.twig' %}
+
+{% block title %}{{ resume.poste }}{% endblock %}
+
+{% block body %}
+    <article class="resume">
+        <header>
+            <h2>{{ resume.poste }}</h2>
+        </header>
+        <div>
+            <p>{{ resume.nom }}</p>
+        </div>
+    </article>
+{% endblock %}

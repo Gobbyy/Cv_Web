@@ -1,0 +1,45 @@
+<!-- app/Resources/views/base.html.twig -->
+<!DOCTYPE html>
+<html>
+  <head>
+    {% block navigation %}
+    <nav>
+        <ul class="navigation">
+            <li><a href="{{ path('cv_homepage') }}">Home</a></li>
+            <li><a href="{{ path('cv_about') }}">About</a></li>
+            <li><a href="{{ path('cv_creation') }}">Création</a></li>
+        </ul>
+    </nav>
+    {% endblock %}
+    {% block stylesheets %}
+    {# CDN Bootstrap #}
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    {% endblock %}
+  </head>
+
+  <body>
+
+
+
+    <section class="col-md-8">
+      {% block body %}
+
+
+
+
+
+      {% endblock %}
+    </section>
+
+      <div id="footer">
+        {% block footer %}
+          ESIEA 2015-WEB
+        {% endblock %}
+      </div>
+    </section>
+
+    {% block javascripts %}{% endblock %}
+
+  </body>
+
+</html>

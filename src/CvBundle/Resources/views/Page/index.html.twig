@@ -1,0 +1,17 @@
+{# src/CvBundle/Resources/views/Page/index.html.twig #}
+{% extends 'CvBundle::layout.html.twig' %}
+
+{% block body %}
+  {% for resume in resume %}
+      <article class="resume">
+
+        <header>
+          <h2><a href="{{path('cv_show', {'id': resume.id })}}">{{resume.poste}}</a></h2>
+          <h4><a href="{{path('cv_edit',{'id':resume.id })}}">Modifier</a></h4>
+
+        </header>
+
+  {% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,28 @@
+cv_homepage:
+    path:     /
+    defaults: { _controller: CvBundle:Page:index }
+    requirements:
+        methods:  GET
+
+cv_about:
+    path:     /about
+    defaults: { _controller: CvBundle:Page:about }
+    requirements:
+        methods:  GET
+
+cv_creation:
+    path:     /add
+    defaults: { _controller: CvBundle:Page:add }
+    requirements:
+        methods:  GET
+
+cv_edit:
+    path:     /edit/{id}
+    defaults: { _controller: CvBundle:Page:edit }
+
+cv_show:
+    path:     /{id}
+    defaults: { _controller: CvBundle:Resume:show}
+    requirements:
+      methods: GET
+      id: \d+
