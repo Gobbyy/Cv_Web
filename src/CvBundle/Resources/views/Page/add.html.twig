@@ -1,112 +1,14 @@
 {# src/CvBundle/Resources/views/Page/add.html.twig #}
+{% extends 'CvBundle::layout.html.twig' %}
 
-{# Le formulaire reste inchangé #}
-<div class="well">
-  {{ form(form) }}
-</div>
 
-{% block stylesheets %}
-{# CDN Bootstrap #}
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-{% endblock %}
+{%block body%}
+  <header>
+    <h1>Creation de CV</h1>
+  </header>
 
-{# CDN Ajax #}
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-{# Script Formation: #}
-<script type="text/javascript">
-  $(document).ready(function() {
-    var $container = $('div#cvbundle_resume_formation');
-
-    var $addLink = $('<a href="#" id="add_formation" class="btn btn-default">Ajouter une formation</a>');
-    $container.append($addLink);
-
-    $addLink.click(function(e) {
-      addFormation($container);
-      e.preventDefault();
-      return false;
-    });
-
-    var index = $container.find(':input').length;
-
-    if (index == 0) {
-      addFormation($container);
-    } else {
-      $container.children('div').each(function() {
-        addDeleteLink($(this));
-      });
-    }
-
-    function addFormation($container) {
-      var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Formation n°' + (index+1))
-          .replace(/__name__/g, index));
-
-      addDeleteLink($prototype);
-
-      $container.append($prototype);
-
-      index++;
-    }
-
-    function addDeleteLink($prototype) {
-      $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
-
-      $prototype.append($deleteLink);
-
-      $deleteLink.click(function(e) {
-        $prototype.remove();
-        e.preventDefault();
-        return false;
-      });
-    }
-  });
-</script>
-
-{# Script Experience: #}
-<script type="text/javascript">
-  $(document).ready(function() {
-    var $container = $('div#cvbundle_resume_experience');
-
-    var $addLink = $('<a href="#" id="add_formation" class="btn btn-default">Ajouter une formation</a>');
-    $container.append($addLink);
-
-    $addLink.click(function(e) {
-      addExperience($container);
-      e.preventDefault();
-      return false;
-    });
-
-    var index = $container.find(':input').length;
-
-    if (index == 0) {
-      addExperience($container);
-    } else {
-      $container.children('div').each(function() {
-        addDeleteLink($(this));
-      });
-    }
-
-    function addExperience($container) {
-      var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Experience n°' + (index+1))
-          .replace(/__name__/g, index));
-
-      addDeleteLink($prototype);
-
-      $container.append($prototype);
-
-      index++;
-    }
-
-    function addDeleteLink($prototype) {
-      $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
-
-      $prototype.append($deleteLink);
-
-      $deleteLink.click(function(e) {
-        $prototype.remove();
-        e.preventDefault();
-        return false;
-      });
-    }
-  });
-</script>
+  <div class="well">
+    {{ form(form) }}
+  </div>
+  
+{%endblock%}

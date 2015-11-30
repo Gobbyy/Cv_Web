@@ -19,7 +19,13 @@ cv_creation:
 cv_edit:
     path:     /edit/{id}
     defaults: { _controller: CvBundle:Page:edit }
-
+    requirements:
+        methods:  GET
+cv_delete:
+    path:     /delete/{id}
+    defaults: { _controller: CvBundle:Page:delete }
+    requirements:
+        methods:  GET
 cv_show:
     path:     /{id}
     defaults: { _controller: CvBundle:Resume:show}

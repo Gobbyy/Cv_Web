@@ -7,7 +7,9 @@
 
         <header>
           <h2><a href="{{path('cv_show', {'id': resume.id })}}">{{resume.poste}}</a></h2>
-          <h4><a href="{{path('cv_edit',{'id':resume.id })}}">Modifier</a></h4>
+          <h4><a href="{{path('cv_edit',{'id':resume.id })}}">Modifier</a>
+          <a href="{{path('cv_delete',{'id':resume.id })}}">Supprimer</a>
+          </h4>
 
         </header>
 

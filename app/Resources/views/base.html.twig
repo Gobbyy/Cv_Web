@@ -3,17 +3,23 @@
 <html>
   <head>
     {% block navigation %}
-    <nav>
-        <ul class="navigation">
-            <li><a href="{{ path('cv_homepage') }}">Home</a></li>
-            <li><a href="{{ path('cv_about') }}">About</a></li>
-            <li><a href="{{ path('cv_creation') }}">Création</a></li>
-        </ul>
-    </nav>
-    {% endblock %}
+      <nav class="navbar navbar-fixed-top">
+        <div class="container-fluid">
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav ">
+              <li><a href="{{ path ('cv_homepage')}}">Home</a></li>
+              <li><a href="{{ path ('cv_about')}}">About</a></li>
+              <li><a href="{{ path('cv_creation') }}">Création</a></li>
+              </ul>
+            </div>
+        </div>
+      </nav>
+      {% endblock %}
+
     {% block stylesheets %}
-    {# CDN Bootstrap #}
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link href="{{ asset('/css/bootstrap.css') }}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
     {% endblock %}
   </head>
 
@@ -21,25 +27,122 @@
 
 
 
-    <section class="col-md-8">
+    <section class="col-md-12">
       {% block body %}
-
-
-
-
-
       {% endblock %}
     </section>
 
-      <div id="footer">
-        {% block footer %}
-          ESIEA 2015-WEB
-        {% endblock %}
-      </div>
-    </section>
+      {% block footer %}
+      <footer class="footer">
+        <p> ESIEA_2015 </p>
+      </footer>
+      {% endblock %}
 
     {% block javascripts %}{% endblock %}
 
   </body>
 
 </html>
+
+
+
+{# CDN Ajax #}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+{# Script Formation: #}
+<script type="text/javascript">
+  $(document).ready(function() {
+    var $container = $('div#cvbundle_resume_formation');
+
+    var $addLink = $('<a href="#" id="add_formation" class="btn btn-default">Ajouter une formation</a>');
+    $container.append($addLink);
+
+    $addLink.click(function(e) {
+      addFormation($container);
+      e.preventDefault();
+      return false;
+    });
+
+    var index = $container.find(':input').length;
+
+    if (index == 0) {
+      addFormation($container);
+    } else {
+      $container.children('div').each(function() {
+        addDeleteLink($(this));
+      });
+    }
+
+    function addFormation($container) {
+      var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Formation n°' + (index+1))
+          .replace(/__name__/g, index));
+
+      addDeleteLink($prototype);
+
+      $container.append($prototype);
+
+      index++;
+    }
+
+    function addDeleteLink($prototype) {
+      $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+
+      $prototype.append($deleteLink);
+
+      $deleteLink.click(function(e) {
+        $prototype.remove();
+        e.preventDefault();
+        return false;
+      });
+    }
+  });
+</script>
+
+{# Script Experience: #}
+<script type="text/javascript">
+  $(document).ready(function() {
+    var $container = $('div#cvbundle_resume_experience');
+
+    var $addLink = $('<a href="#" id="add_formation" class="btn btn-default">Ajouter une experience</a>');
+    $container.append($addLink);
+
+    $addLink.click(function(e) {
+      addExperience($container);
+      e.preventDefault();
+      return false;
+    });
+
+    var index = $container.find(':input').length;
+
+    if (index == 0) {
+      addExperience($container);
+    } else {
+      $container.children('div').each(function() {
+        addDeleteLink($(this));
+      });
+    }
+
+    function addExperience($container) {
+      var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Experience n°' + (index+1))
+          .replace(/__name__/g, index));
+
+      addDeleteLink($prototype);
+
+      $container.append($prototype);
+
+      index++;
+    }
+
+    function addDeleteLink($prototype) {
+      $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+
+      $prototype.append($deleteLink);
+
+      $deleteLink.click(function(e) {
+        $prototype.remove();
+        e.preventDefault();
+        return false;
+      });
+    }
+  });
+</script>

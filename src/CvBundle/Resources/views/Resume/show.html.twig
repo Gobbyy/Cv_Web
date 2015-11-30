@@ -6,10 +6,33 @@
 {% block body %}
     <article class="resume">
         <header>
-            <h2>{{ resume.poste }}</h2>
+            <h2>
+            <p id="name">{{ resume.nom }} {{ resume.prenom }}</p>
+            <p id="poste">{{ resume.poste }}</p>
+            </h2>
+            <h4><p> {{resume.shortresume}} </p></h4>
         </header>
         <div>
-            <p>{{ resume.nom }}</p>
+          {% for formation in resume.formation %}
+          <p> {{formation.ecole}}</p>
+          <p> {{formation.debut|date('Y')}} - {{formation.fin|date('Y')}}</p>
+          <p> {{formation.specialite}}</p>
+          {% endfor %}
+
+          {% for experience in resume.experience %}
+          <p> {{experience.fonction}}</p>
+          <p> {{experience.debut|date('m/Y')}} - {{experience.fin|date('m/Y')}}</p>
+          <p> {{experience.lieu}}</p>
+          <p> {{experience.description}}</p>
+          {% endfor %}
+
+
+
+
         </div>
     </article>
+
+    <h4><a href="{{path('cv_edit',{'id':resume.id })}}">Modifier</a>
+    <a href="{{path('cv_delete',{'id':resume.id })}}">Supprimer</a>
+    </h4>
 {% endblock %}

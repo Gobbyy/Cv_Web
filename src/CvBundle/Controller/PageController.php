@@ -70,6 +70,34 @@ class PageController extends Controller
         'resume' => $resume
       ));
     }
+
+    public function deleteAction($id, Request $request)
+    {
+      $em = $this->getDoctrine()->getManager();
+
+      $resume = $em->getRepository('CvBundle:Resume')->find($id);
+
+      if (null === $resume) {
+        throw new NotFoundHttpException("Le cv d'id ".$id." n'existe pas.");
+      }
+
+      $form = $this->createFormBuilder()->getForm();
+
+      if ($form->handleRequest($request)->isValid()) {
+        $em->remove($resume);
+        $em->flush();
+
+        $request->getSession()->getFlashBag()->add('info', "Le cv a bien été supprimée.");
+
+        return $this->redirect($this->generateUrl('cv_homepage'));
+      }
+
+      return $this->render('CvBundle:Page:delete.html.twig', array(
+        'resume' => $resume,
+        'form'   => $form->createView()
+      ));
+    }
+
       public function indexAction(){
 
         $em = $this->getDoctrine()->getManager();
@@ -84,6 +112,8 @@ class PageController extends Controller
             'resume' => $resume
         ));
       }
+
+
 
 
 
